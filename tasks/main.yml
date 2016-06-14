@@ -1,0 +1,22 @@
+---
+# tasks file for role-php
+- name: add repository
+  yum: name=https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+  become: True
+
+- name: add repository
+  yum: name=http://rpms.remirepo.net/enterprise/remi-release-6.rpm
+  become: True
+
+- name: install php
+  yum: name={{ item }} enablerepo=remi,remi-php70
+  with_items:
+    - php
+    - php-devel
+    - php-mbstring
+    - php-pdo
+    - php-mysql
+    - php-pecl-zip
+    - php-tokenizer
+    - php-xml
+  become: True
